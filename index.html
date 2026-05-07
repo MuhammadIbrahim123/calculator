@@ -7,272 +7,56 @@
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --navy: #1d4e89;
-      --navy-dark: #163d6b;
-      --navy-light: #2a6cb5;
-      --accent: #e8a020;
-      --bg: #f0f4fa;
-      --white: #ffffff;
-      --text: #1a2638;
-      --muted: #5a6a80;
-      --border: #d0daea;
-      --success-bg: #eaf4ee;
-      --success-border: #4caf50;
-      --warn-bg: #fff8e6;
-      --warn-border: #e8a020;
-      --high-bg: #fdf0f0;
-      --high-border: #d9534f;
-      --radius: 10px;
-      --shadow: 0 4px 24px rgba(29,78,137,0.10);
+      --navy: #1d4e89; --navy-dark: #163d6b; --navy-light: #2a6cb5;
+      --accent: #e8a020; --bg: #f0f4fa; --white: #ffffff;
+      --text: #1a2638; --muted: #5a6a80; --border: #d0daea;
+      --success-bg: #eaf4ee; --success-border: #4caf50;
+      --warn-bg: #fff8e6; --warn-border: #e8a020;
+      --high-bg: #fdf0f0; --high-border: #d9534f;
+      --radius: 10px; --shadow: 0 4px 24px rgba(29,78,137,0.10);
     }
-
-    body {
-      font-family: 'Source Sans 3', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, var(--navy) 70%, var(--navy-light) 100%);
-      color: white;
-      padding: 64px 20px 56px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 80% 50%, rgba(255,255,255,0.06) 0%, transparent 70%);
-    }
-    .hero .container { position: relative; z-index: 1; }
-    .hero h1 {
-      font-family: 'Merriweather', serif;
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      line-height: 1.25;
-      margin-bottom: 16px;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      opacity: 0.88;
-      max-width: 560px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 4px 14px;
-      border-radius: 20px;
-      margin-bottom: 20px;
-    }
-
-    /* CONTAINER */
-    .container {
-      width: 90%;
-      max-width: 780px;
-      margin: auto;
-    }
-
-    /* CALCULATOR SECTION */
+    body { font-family: 'Source Sans 3', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    .hero { background: linear-gradient(135deg, var(--navy) 70%, var(--navy-light) 100%); color: white; padding: 64px 20px 56px; text-align: center; }
+    .hero h1 { font-family: 'Merriweather', Georgia, serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 700; line-height: 1.25; margin-bottom: 16px; }
+    .hero p { font-size: 1.1rem; opacity: 0.88; max-width: 560px; margin: 0 auto; line-height: 1.6; }
+    .hero-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 20px; }
+    .container { width: 90%; max-width: 780px; margin: auto; }
     .calculator-section { padding: 48px 20px 24px; }
-
-    .card {
-      background: var(--white);
-      border-radius: 14px;
-      box-shadow: var(--shadow);
-      padding: 40px 44px;
-      border: 1px solid var(--border);
-    }
-
-    .section-title {
-      font-family: 'Merriweather', serif;
-      font-size: 1.25rem;
-      color: var(--navy);
-      margin-bottom: 28px;
-      padding-bottom: 14px;
-      border-bottom: 2px solid var(--bg);
-    }
-
+    .card { background: var(--white); border-radius: 14px; box-shadow: var(--shadow); padding: 40px 44px; border: 1px solid var(--border); }
+    .section-title { font-family: 'Merriweather', Georgia, serif; font-size: 1.25rem; color: var(--navy); margin-bottom: 28px; padding-bottom: 14px; border-bottom: 2px solid var(--bg); }
     .form-group { margin-bottom: 28px; }
-
-    label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: 600;
-      font-size: 0.97rem;
-      color: var(--text);
-      line-height: 1.4;
-    }
-
-    .q-number {
-      display: inline-block;
-      background: var(--navy);
-      color: white;
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-align: center;
-      line-height: 24px;
-      margin-right: 8px;
-      flex-shrink: 0;
-    }
-
-    select {
-      width: 100%;
-      padding: 13px 16px;
-      font-size: 1rem;
-      font-family: 'Source Sans 3', sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231d4e89' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 16px center;
-      padding-right: 42px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-    }
-    select:focus {
-      outline: none;
-      border-color: var(--navy);
-      box-shadow: 0 0 0 3px rgba(29,78,137,0.12);
-    }
-    select:hover { border-color: var(--navy-light); }
-
-    .divider {
-      height: 1px;
-      background: var(--bg);
-      margin: 32px 0;
-    }
-
-    .btn-calculate {
-      width: 100%;
-      padding: 16px;
-      font-size: 1.05rem;
-      font-family: 'Source Sans 3', sans-serif;
-      font-weight: 700;
-      background: var(--navy);
-      color: white;
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-      letter-spacing: 0.3px;
-      box-shadow: 0 3px 12px rgba(29,78,137,0.25);
-    }
-    .btn-calculate:hover {
-      background: var(--navy-dark);
-      box-shadow: 0 6px 20px rgba(29,78,137,0.32);
-    }
-    .btn-calculate:active { transform: translateY(1px); }
-
-    /* RESULTS */
+    label { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-weight: 600; font-size: 0.97rem; color: var(--text); }
+    .q-number { display: inline-flex; align-items: center; justify-content: center; background: var(--navy); color: white; border-radius: 50%; width: 26px; height: 26px; min-width: 26px; font-size: 0.75rem; font-weight: 700; }
+    select { width: 100%; padding: 13px 42px 13px 16px; font-size: 1rem; color: var(--text); background-color: var(--bg); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231d4e89' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; border: 1.5px solid var(--border); border-radius: var(--radius); appearance: none; -webkit-appearance: none; cursor: pointer; transition: border-color 0.2s; }
+    select:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(29,78,137,0.12); }
+    .divider { height: 1px; background: var(--bg); margin: 32px 0; }
+    .btn-calculate { width: 100%; padding: 16px; font-size: 1.05rem; font-weight: 700; background: var(--navy); color: white; border: none; border-radius: var(--radius); cursor: pointer; transition: background 0.2s, box-shadow 0.2s; box-shadow: 0 3px 12px rgba(29,78,137,0.25); }
+    .btn-calculate:hover { background: var(--navy-dark); box-shadow: 0 6px 20px rgba(29,78,137,0.32); }
     .results-section { padding: 12px 20px 56px; }
-
-    .results-box {
-      background: var(--white);
-      border-radius: 14px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      display: none;
-      animation: fadeUp 0.45s ease both;
-    }
-    .results-box.visible { display: block; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .results-header {
-      background: var(--navy);
-      color: white;
-      padding: 24px 36px;
-    }
-    .results-header h2 {
-      font-family: 'Merriweather', serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-    }
-
+    .results-box { background: var(--white); border-radius: 14px; box-shadow: var(--shadow); border: 1px solid var(--border); overflow: hidden; display: none; }
+    .results-box.visible { display: block; animation: fadeUp 0.45s ease both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .results-header { background: var(--navy); color: white; padding: 24px 36px; }
+    .results-header h2 { font-family: 'Merriweather', Georgia, serif; font-size: 1.15rem; }
     .results-body { padding: 32px 36px 36px; }
-
-    .score-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 18px;
-    }
-    .score-badge.low    { background: var(--success-bg); color: #2e7d32; border: 1.5px solid var(--success-border); }
-    .score-badge.mod    { background: var(--warn-bg);    color: #92600a; border: 1.5px solid var(--warn-border); }
-    .score-badge.high   { background: var(--high-bg);    color: #c0392b; border: 1.5px solid var(--high-border); }
-
-    .score-icon { font-size: 1.3rem; }
-
-    .recommendation-text {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
-    .score-bar-wrap {
-      margin: 22px 0 8px;
-    }
-    .score-bar-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-    .score-bar-track {
-      height: 8px;
-      background: var(--bg);
-      border-radius: 99px;
-      overflow: hidden;
-    }
-    .score-bar-fill {
-      height: 100%;
-      border-radius: 99px;
-      transition: width 0.6s ease;
-    }
+    .score-badge { display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; border-radius: 8px; font-weight: 700; font-size: 1.1rem; margin-bottom: 18px; }
+    .score-badge.low  { background: var(--success-bg); color: #2e7d32; border: 1.5px solid var(--success-border); }
+    .score-badge.mod  { background: var(--warn-bg);    color: #92600a; border: 1.5px solid var(--warn-border); }
+    .score-badge.high { background: var(--high-bg);    color: #c0392b; border: 1.5px solid var(--high-border); }
+    .score-bar-wrap { margin: 22px 0 8px; }
+    .score-bar-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; }
+    .score-bar-track { height: 8px; background: var(--bg); border-radius: 99px; overflow: hidden; }
+    .score-bar-fill { height: 100%; border-radius: 99px; width: 0%; transition: width 0.6s ease; }
     .score-bar-fill.low  { background: #4caf50; }
     .score-bar-fill.mod  { background: var(--accent); }
     .score-bar-fill.high { background: #d9534f; }
-
-    /* RESPONSIVE */
-    @media (max-width: 600px) {
-      .card { padding: 28px 22px; }
-      .results-header, .results-body { padding-left: 22px; padding-right: 22px; }
-      .hero { padding: 48px 16px 40px; }
-    }
+    .recommendation-text { font-size: 1rem; line-height: 1.7; color: var(--muted); margin-top: 16px; }
+    @media (max-width: 600px) { .card { padding: 28px 22px; } .results-header, .results-body { padding-left: 22px; padding-right: 22px; } .hero { padding: 48px 16px 40px; } }
   </style>
 </head>
 <body>
 
-<!-- HERO -->
 <header class="hero">
   <div class="container">
     <div class="hero-badge">Free Assessment</div>
@@ -281,68 +65,61 @@
   </div>
 </header>
 
-<!-- CALCULATOR FORM -->
 <section class="calculator-section">
   <div class="container">
     <div class="card">
       <h2 class="section-title">Answer 5 Quick Questions</h2>
-      <form id="techCalculator">
 
-        <div class="form-group">
-          <label><span class="q-number">1</span>What is your age range?</label>
-          <select id="age">
-            <option value="1">60–69</option>
-            <option value="2">70–79</option>
-            <option value="3">80+</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label><span class="q-number">1</span>What is your age range?</label>
+        <select id="age">
+          <option value="1">60–69</option>
+          <option value="2">70–79</option>
+          <option value="3">80+</option>
+        </select>
+      </div>
 
-        <div class="form-group">
-          <label><span class="q-number">2</span>How comfortable are you using smartphones?</label>
-          <select id="smartphone">
-            <option value="3">Very Comfortable</option>
-            <option value="2">Somewhat Comfortable</option>
-            <option value="1">Not Comfortable</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label><span class="q-number">2</span>How comfortable are you using smartphones?</label>
+        <select id="smartphone">
+          <option value="3">Very Comfortable</option>
+          <option value="2">Somewhat Comfortable</option>
+          <option value="1">Not Comfortable</option>
+        </select>
+      </div>
 
-        <div class="form-group">
-          <label><span class="q-number">3</span>How often do automated phone systems frustrate you?</label>
-          <select id="automation">
-            <option value="3">Frequently</option>
-            <option value="2">Sometimes</option>
-            <option value="1">Rarely</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label><span class="q-number">3</span>How often do automated phone systems frustrate you?</label>
+        <select id="automation">
+          <option value="3">Frequently</option>
+          <option value="2">Sometimes</option>
+          <option value="1">Rarely</option>
+        </select>
+      </div>
 
-        <div class="form-group">
-          <label><span class="q-number">4</span>Have you ever avoided services because technology was confusing?</label>
-          <select id="avoidance">
-            <option value="3">Yes</option>
-            <option value="1">No</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label><span class="q-number">4</span>Have you ever avoided services because technology was confusing?</label>
+        <select id="avoidance">
+          <option value="3">Yes</option>
+          <option value="1">No</option>
+        </select>
+      </div>
 
-        <div class="form-group">
-          <label><span class="q-number">5</span>Do you want help learning technology?</label>
-          <select id="help">
-            <option value="3">Yes</option>
-            <option value="1">Maybe</option>
-            <option value="0">No</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label><span class="q-number">5</span>Do you want help learning technology?</label>
+        <select id="help">
+          <option value="3">Yes</option>
+          <option value="1">Maybe</option>
+          <option value="0">No</option>
+        </select>
+      </div>
 
-        <div class="divider"></div>
-
-        <button type="button" class="btn-calculate" onclick="calculateScore()">
-          Calculate My Support Level
-        </button>
-      </form>
+      <div class="divider"></div>
+      <button id="calcBtn" class="btn-calculate">Calculate My Support Level</button>
     </div>
   </div>
 </section>
 
-<!-- RESULTS -->
 <section class="results-section">
   <div class="container">
     <div id="resultsBox" class="results-box">
@@ -351,17 +128,15 @@
       </div>
       <div class="results-body">
         <div id="scoreBadge" class="score-badge"></div>
-
         <div class="score-bar-wrap">
           <div class="score-bar-label">
             <span>Low Support</span>
             <span>High Support</span>
           </div>
           <div class="score-bar-track">
-            <div id="scoreBarFill" class="score-bar-fill" style="width:0%"></div>
+            <div id="scoreBarFill" class="score-bar-fill"></div>
           </div>
         </div>
-
         <p id="recommendation" class="recommendation-text"></p>
       </div>
     </div>
@@ -369,7 +144,7 @@
 </section>
 
 <script>
-  function calculateScore() {
+  document.getElementById('calcBtn').addEventListener('click', function() {
     var age        = parseInt(document.getElementById('age').value);
     var smartphone = parseInt(document.getElementById('smartphone').value);
     var automation = parseInt(document.getElementById('automation').value);
@@ -377,48 +152,41 @@
     var help       = parseInt(document.getElementById('help').value);
 
     var total = age + smartphone + automation + avoidance + help;
-
-    // Max possible score = 3+3+3+3+3 = 15, min = 1+1+1+1+0 = 4
-    var pct = Math.round(((total - 4) / (15 - 4)) * 100);
+    var pct   = Math.round(((total - 4) / (15 - 4)) * 100);
     pct = Math.max(4, Math.min(pct, 100));
 
     var level, icon, badgeClass, recText;
 
     if (total <= 6) {
-      level      = "Low Support Needed";
-      icon       = "✅";
-      badgeClass = "low";
-      recText    = "You are fairly comfortable with technology but may benefit from scam awareness workshops to stay safe online and over the phone.";
+      level = "Low Support Needed"; icon = "✅"; badgeClass = "low";
+      recText = "You are fairly comfortable with technology but may benefit from scam awareness workshops to stay safe online and over the phone.";
     } else if (total <= 10) {
-      level      = "Moderate Support Recommended";
-      icon       = "⚠️";
-      badgeClass = "mod";
-      recText    = "You may benefit from one-on-one coaching and community workshops to build confidence with everyday technology.";
+      level = "Moderate Support Recommended"; icon = "⚠️"; badgeClass = "mod";
+      recText = "You may benefit from one-on-one coaching and community workshops to build confidence with everyday technology.";
     } else {
-      level      = "High Support Recommended";
-      icon       = "📞";
-      badgeClass = "high";
-      recText    = "We recommend personalized technology coaching, phone assistance, and Digital Buddy volunteer support to help you stay connected safely.";
+      level = "High Support Recommended"; icon = "📞"; badgeClass = "high";
+      recText = "We recommend personalized technology coaching, phone assistance, and Digital Buddy volunteer support to help you stay connected safely.";
     }
 
     var badge = document.getElementById('scoreBadge');
     badge.className = "score-badge " + badgeClass;
-    badge.innerHTML = "<span class='score-icon'>" + icon + "</span>" + level;
+    badge.innerHTML = "<span style='font-size:1.3rem'>" + icon + "</span>" + level;
 
     var fill = document.getElementById('scoreBarFill');
     fill.className = "score-bar-fill " + badgeClass;
-    // Trigger animation
     fill.style.width = "0%";
-    setTimeout(function(){ fill.style.width = pct + "%"; }, 50);
+    setTimeout(function() { fill.style.width = pct + "%"; }, 50);
 
     document.getElementById('recommendation').textContent = recText;
 
     var box = document.getElementById('resultsBox');
     box.classList.remove('visible');
-    void box.offsetWidth; // reflow to re-trigger animation
+    void box.offsetWidth;
     box.classList.add('visible');
-    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+    setTimeout(function() {
+      box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  });
 </script>
 
 </body>
