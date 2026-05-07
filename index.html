@@ -4,38 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Senior Technology Readiness Calculator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --blue: #1d4e89;
-      --blue-dark: #163d6b;
-      --blue-light: #e8f0fb;
-      --green: #2e7d5e;
-      --green-light: #e6f4ef;
-      --orange: #c0580a;
-      --orange-light: #fef3e8;
-      --red: #b91c1c;
-      --red-light: #fef2f2;
-      --text: #1a1a2e;
-      --muted: #64748b;
-      --border: #e2e8f0;
-      --bg: #f7f9fc;
+      --navy: #1d4e89;
+      --navy-dark: #163d6b;
+      --navy-light: #2a6cb5;
+      --accent: #e8a020;
+      --bg: #f0f4fa;
+      --white: #ffffff;
+      --text: #1a2638;
+      --muted: #5a6a80;
+      --border: #d0daea;
+      --success-bg: #eaf4ee;
+      --success-border: #4caf50;
+      --warn-bg: #fff8e6;
+      --warn-border: #e8a020;
+      --high-bg: #fdf0f0;
+      --high-border: #d9534f;
+      --radius: 10px;
+      --shadow: 0 4px 24px rgba(29,78,137,0.10);
     }
 
     body {
       font-family: 'Source Sans 3', sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      min-height: 100vh;
     }
 
     /* HERO */
     .hero {
-      background: linear-gradient(135deg, #1d4e89 0%, #0f3460 100%);
+      background: linear-gradient(135deg, var(--navy) 70%, var(--navy-light) 100%);
       color: white;
-      padding: 72px 24px 80px;
+      padding: 64px 20px 56px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -43,340 +47,379 @@
     .hero::before {
       content: '';
       position: absolute;
-      width: 500px; height: 500px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.04);
-      top: -200px; right: -100px;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(255,255,255,0.06) 0%, transparent 70%);
     }
-    .hero::after {
-      content: '';
-      position: absolute;
-      width: 300px; height: 300px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.04);
-      bottom: -100px; left: -80px;
-    }
-    .hero .badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 100px;
-      margin-bottom: 20px;
-    }
+    .hero .container { position: relative; z-index: 1; }
     .hero h1 {
       font-family: 'Merriweather', serif;
-      font-size: clamp(26px, 5vw, 42px);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
       font-weight: 700;
+      letter-spacing: -0.3px;
       line-height: 1.25;
-      margin-bottom: 20px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
+      margin-bottom: 16px;
     }
     .hero p {
-      font-size: 18px;
-      opacity: 0.85;
+      font-size: 1.1rem;
+      opacity: 0.88;
       max-width: 560px;
       margin: 0 auto;
+      line-height: 1.6;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
     }
 
     /* CONTAINER */
-    .container { width: 92%; max-width: 760px; margin: 0 auto; }
-
-    /* ARTICLE INTRO */
-    .article-intro {
-      padding: 48px 24px 0;
-    }
-    .article-intro p {
-      font-size: 17px;
-      color: var(--muted);
-      max-width: 680px;
-      margin: 0 auto 12px;
+    .container {
+      width: 90%;
+      max-width: 780px;
+      margin: auto;
     }
 
-    /* CALCULATOR CARD */
-    .calc-card {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 4px 24px rgba(29,78,137,0.08), 0 1px 4px rgba(0,0,0,0.04);
-      padding: 40px 40px 36px;
-      margin: 32px auto;
+    /* CALCULATOR SECTION */
+    .calculator-section { padding: 48px 20px 24px; }
+
+    .card {
+      background: var(--white);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 40px 44px;
+      border: 1px solid var(--border);
     }
-    .calc-card h2 {
+
+    .section-title {
       font-family: 'Merriweather', serif;
-      font-size: 22px;
-      color: var(--blue);
-      margin-bottom: 8px;
-    }
-    .calc-card .subtitle {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 32px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
+      font-size: 1.25rem;
+      color: var(--navy);
+      margin-bottom: 28px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--bg);
     }
 
-    /* FORM */
     .form-group { margin-bottom: 28px; }
-    .form-group:last-of-type { margin-bottom: 32px; }
 
-    .question-num {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 6px;
-    }
     label {
       display: block;
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text);
       margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 0.97rem;
+      color: var(--text);
       line-height: 1.4;
     }
+
+    .q-number {
+      display: inline-block;
+      background: var(--navy);
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 24px;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
     select {
       width: 100%;
       padding: 13px 16px;
-      font-size: 15px;
+      font-size: 1rem;
       font-family: 'Source Sans 3', sans-serif;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      background: white;
       color: var(--text);
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231d4e89' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231d4e89' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 14px center;
-      cursor: pointer;
+      background-position: right 16px center;
+      padding-right: 42px;
       transition: border-color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
     }
     select:focus {
       outline: none;
-      border-color: var(--blue);
+      border-color: var(--navy);
       box-shadow: 0 0 0 3px rgba(29,78,137,0.12);
     }
+    select:hover { border-color: var(--navy-light); }
 
-    /* BUTTON */
-    .btn-calc {
+    .divider {
+      height: 1px;
+      background: var(--bg);
+      margin: 32px 0;
+    }
+
+    .btn-calculate {
       width: 100%;
-      padding: 16px 24px;
-      font-size: 16px;
-      font-weight: 700;
+      padding: 16px;
+      font-size: 1.05rem;
       font-family: 'Source Sans 3', sans-serif;
-      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+      font-weight: 700;
+      background: var(--navy);
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: var(--radius);
       cursor: pointer;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
       letter-spacing: 0.3px;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 14px rgba(29,78,137,0.3);
+      box-shadow: 0 3px 12px rgba(29,78,137,0.25);
     }
-    .btn-calc:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(29,78,137,0.38);
+    .btn-calculate:hover {
+      background: var(--navy-dark);
+      box-shadow: 0 6px 20px rgba(29,78,137,0.32);
     }
-    .btn-calc:active { transform: translateY(0); }
+    .btn-calculate:active { transform: translateY(1px); }
 
     /* RESULTS */
+    .results-section { padding: 12px 20px 56px; }
+
     .results-box {
-      display: none;
-      margin-top: 28px;
-      border-radius: 12px;
+      background: var(--white);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
       overflow: hidden;
-      animation: fadeUp 0.4s ease;
+      display: none;
+      animation: fadeUp 0.45s ease both;
     }
+    .results-box.visible { display: block; }
+
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
+
     .results-header {
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
+      background: var(--navy);
+      color: white;
+      padding: 24px 36px;
     }
-    .results-icon {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-    .results-label {
-      font-size: 11px;
+    .results-header h2 {
+      font-family: 'Merriweather', serif;
+      font-size: 1.15rem;
       font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      opacity: 0.7;
-      margin-bottom: 2px;
     }
-    .results-title { font-size: 20px; font-weight: 700; }
-    .results-body { padding: 20px 24px 24px; font-size: 15px; line-height: 1.7; }
 
-    .level-low    { background: var(--green-light); color: var(--green); }
-    .level-low    .results-icon { background: rgba(46,125,94,0.15); }
-    .level-mid    { background: var(--orange-light); color: var(--orange); }
-    .level-mid    .results-icon { background: rgba(192,88,10,0.15); }
-    .level-high   { background: var(--red-light); color: var(--red); }
-    .level-high   .results-icon { background: rgba(185,28,28,0.15); }
+    .results-body { padding: 32px 36px 36px; }
 
-    .results-body { background: white; border: 1.5px solid var(--border); border-top: none; border-radius: 0 0 12px 12px; }
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 18px;
+    }
+    .score-badge.low    { background: var(--success-bg); color: #2e7d32; border: 1.5px solid var(--success-border); }
+    .score-badge.mod    { background: var(--warn-bg);    color: #92600a; border: 1.5px solid var(--warn-border); }
+    .score-badge.high   { background: var(--high-bg);    color: #c0392b; border: 1.5px solid var(--high-border); }
 
-    /* FOOTER NOTE */
-    .footer-note {
-      text-align: center;
-      padding: 32px 24px 48px;
-      font-size: 13px;
+    .score-icon { font-size: 1.3rem; }
+
+    .recommendation-text {
+      font-size: 1rem;
+      line-height: 1.7;
       color: var(--muted);
     }
 
-    @media (max-width: 560px) {
-      .calc-card { padding: 28px 20px 24px; }
+    .score-bar-wrap {
+      margin: 22px 0 8px;
+    }
+    .score-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .score-bar-track {
+      height: 8px;
+      background: var(--bg);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .score-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.6s ease;
+    }
+    .score-bar-fill.low  { background: #4caf50; }
+    .score-bar-fill.mod  { background: var(--accent); }
+    .score-bar-fill.high { background: #d9534f; }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .card { padding: 28px 22px; }
+      .results-header, .results-body { padding-left: 22px; padding-right: 22px; }
+      .hero { padding: 48px 16px 40px; }
     }
   </style>
 </head>
 <body>
 
+<!-- HERO -->
 <header class="hero">
   <div class="container">
-    <div class="badge">Free Assessment Tool</div>
+    <div class="hero-badge">Free Assessment</div>
     <h1>Senior Technology Readiness Calculator</h1>
     <p>Find out what type of technology support and training may help you or your loved one stay connected safely.</p>
   </div>
 </header>
 
-<section class="article-intro">
+<!-- CALCULATOR FORM -->
+<section class="calculator-section">
   <div class="container">
-    <p>Answer 5 quick questions below to receive a personalized recommendation on the level of technology support that may benefit you most.</p>
+    <div class="card">
+      <h2 class="section-title">Answer 5 Quick Questions</h2>
+      <form id="techCalculator">
+
+        <div class="form-group">
+          <label><span class="q-number">1</span>What is your age range?</label>
+          <select id="age">
+            <option value="1">60–69</option>
+            <option value="2">70–79</option>
+            <option value="3">80+</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label><span class="q-number">2</span>How comfortable are you using smartphones?</label>
+          <select id="smartphone">
+            <option value="3">Very Comfortable</option>
+            <option value="2">Somewhat Comfortable</option>
+            <option value="1">Not Comfortable</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label><span class="q-number">3</span>How often do automated phone systems frustrate you?</label>
+          <select id="automation">
+            <option value="3">Frequently</option>
+            <option value="2">Sometimes</option>
+            <option value="1">Rarely</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label><span class="q-number">4</span>Have you ever avoided services because technology was confusing?</label>
+          <select id="avoidance">
+            <option value="3">Yes</option>
+            <option value="1">No</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label><span class="q-number">5</span>Do you want help learning technology?</label>
+          <select id="help">
+            <option value="3">Yes</option>
+            <option value="1">Maybe</option>
+            <option value="0">No</option>
+          </select>
+        </div>
+
+        <div class="divider"></div>
+
+        <button type="button" class="btn-calculate" onclick="calculateScore()">
+          Calculate My Support Level
+        </button>
+      </form>
+    </div>
   </div>
 </section>
 
-<section style="padding: 0 24px 40px;">
+<!-- RESULTS -->
+<section class="results-section">
   <div class="container">
-    <div class="calc-card">
-      <h2>Your Technology Assessment</h2>
-      <p class="subtitle">Takes less than 1 minute · 5 questions · Instant results</p>
-
-      <div class="form-group">
-        <div class="question-num">Question 1 of 5</div>
-        <label>What is your age range?</label>
-        <select id="age">
-          <option value="1">60–69</option>
-          <option value="2">70–79</option>
-          <option value="3">80+</option>
-        </select>
+    <div id="resultsBox" class="results-box">
+      <div class="results-header">
+        <h2>Your Technology Support Score</h2>
       </div>
+      <div class="results-body">
+        <div id="scoreBadge" class="score-badge"></div>
 
-      <div class="form-group">
-        <div class="question-num">Question 2 of 5</div>
-        <label>How comfortable are you using smartphones?</label>
-        <select id="smartphone">
-          <option value="3">Very Comfortable</option>
-          <option value="2">Somewhat Comfortable</option>
-          <option value="1">Not Comfortable</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <div class="question-num">Question 3 of 5</div>
-        <label>How often do automated phone systems frustrate you?</label>
-        <select id="automation">
-          <option value="3">Frequently</option>
-          <option value="2">Sometimes</option>
-          <option value="1">Rarely</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <div class="question-num">Question 4 of 5</div>
-        <label>Have you ever avoided services because technology was confusing?</label>
-        <select id="avoidance">
-          <option value="3">Yes</option>
-          <option value="1">No</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <div class="question-num">Question 5 of 5</div>
-        <label>Do you want help learning technology?</label>
-        <select id="help">
-          <option value="3">Yes</option>
-          <option value="1">Maybe</option>
-          <option value="0">No</option>
-        </select>
-      </div>
-
-      <button class="btn-calc" onclick="calculateScore()">Calculate My Support Level →</button>
-
-      <div id="resultsBox" class="results-box">
-        <div id="resultsHeader" class="results-header">
-          <div id="resultsIcon" class="results-icon"></div>
-          <div>
-            <div class="results-label">Your Result</div>
-            <div class="results-title" id="scoreText"></div>
+        <div class="score-bar-wrap">
+          <div class="score-bar-label">
+            <span>Low Support</span>
+            <span>High Support</span>
+          </div>
+          <div class="score-bar-track">
+            <div id="scoreBarFill" class="score-bar-fill" style="width:0%"></div>
           </div>
         </div>
-        <div class="results-body" id="recommendation"></div>
+
+        <p id="recommendation" class="recommendation-text"></p>
       </div>
     </div>
   </div>
 </section>
 
-<div class="footer-note">
-  This tool is for informational purposes only and does not constitute medical or professional advice.
-</div>
-
 <script>
   function calculateScore() {
-    const age        = parseInt(document.getElementById('age').value);
-    const smartphone = parseInt(document.getElementById('smartphone').value);
-    const automation = parseInt(document.getElementById('automation').value);
-    const avoidance  = parseInt(document.getElementById('avoidance').value);
-    const help       = parseInt(document.getElementById('help').value);
-    const total = age + smartphone + automation + avoidance + help;
+    var age        = parseInt(document.getElementById('age').value);
+    var smartphone = parseInt(document.getElementById('smartphone').value);
+    var automation = parseInt(document.getElementById('automation').value);
+    var avoidance  = parseInt(document.getElementById('avoidance').value);
+    var help       = parseInt(document.getElementById('help').value);
 
-    let resultText, recommendation, levelClass, icon;
+    var total = age + smartphone + automation + avoidance + help;
+
+    // Max possible score = 3+3+3+3+3 = 15, min = 1+1+1+1+0 = 4
+    var pct = Math.round(((total - 4) / (15 - 4)) * 100);
+    pct = Math.max(4, Math.min(pct, 100));
+
+    var level, icon, badgeClass, recText;
 
     if (total <= 6) {
-      resultText     = 'Low Support Needed';
-      recommendation = 'You are fairly comfortable with technology. You may still benefit from scam awareness workshops to stay safe online and keep your devices secure.';
-      levelClass     = 'level-low';
-      icon           = '✅';
+      level      = "Low Support Needed";
+      icon       = "✅";
+      badgeClass = "low";
+      recText    = "You are fairly comfortable with technology but may benefit from scam awareness workshops to stay safe online and over the phone.";
     } else if (total <= 10) {
-      resultText     = 'Moderate Support Recommended';
-      recommendation = 'You may benefit from one-on-one coaching sessions and community technology workshops. A little guidance can go a long way toward boosting your confidence and independence.';
-      levelClass     = 'level-mid';
-      icon           = '💡';
+      level      = "Moderate Support Recommended";
+      icon       = "⚠️";
+      badgeClass = "mod";
+      recText    = "You may benefit from one-on-one coaching and community workshops to build confidence with everyday technology.";
     } else {
-      resultText     = 'High Support Recommended';
-      recommendation = 'We recommend personalized technology coaching, dedicated phone assistance, and connection with a Digital Buddy volunteer who can guide you step by step at your own pace.';
-      levelClass     = 'level-high';
-      icon           = '🤝';
+      level      = "High Support Recommended";
+      icon       = "📞";
+      badgeClass = "high";
+      recText    = "We recommend personalized technology coaching, phone assistance, and Digital Buddy volunteer support to help you stay connected safely.";
     }
 
-    const box    = document.getElementById('resultsBox');
-    const header = document.getElementById('resultsHeader');
-    const iconEl = document.getElementById('resultsIcon');
+    var badge = document.getElementById('scoreBadge');
+    badge.className = "score-badge " + badgeClass;
+    badge.innerHTML = "<span class='score-icon'>" + icon + "</span>" + level;
 
-    document.getElementById('scoreText').textContent     = resultText;
-    document.getElementById('recommendation').textContent = recommendation;
-    iconEl.textContent = icon;
+    var fill = document.getElementById('scoreBarFill');
+    fill.className = "score-bar-fill " + badgeClass;
+    // Trigger animation
+    fill.style.width = "0%";
+    setTimeout(function(){ fill.style.width = pct + "%"; }, 50);
 
-    header.className = 'results-header ' + levelClass;
-    iconEl.className = 'results-icon ' + levelClass;
+    document.getElementById('recommendation').textContent = recText;
 
-    box.style.display = 'block';
-    setTimeout(() => box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+    var box = document.getElementById('resultsBox');
+    box.classList.remove('visible');
+    void box.offsetWidth; // reflow to re-trigger animation
+    box.classList.add('visible');
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 </script>
+
 </body>
 </html>
